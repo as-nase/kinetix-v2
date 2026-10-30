@@ -1,0 +1,20 @@
+import { ArrowLeft, ArrowRight, Check, ShieldCheck, Truck, Zap } from "lucide-react"
+import { Link, useParams } from "react-router-dom"
+import { StorefrontNav } from "@/components/kinetix/StorefrontNav"
+import { StorefrontFooter } from "@/components/kinetix/StoreSections"
+import { useStoreCart } from "@/components/kinetix/useStoreCart"
+import { products } from "@/components/kinetix/storeData"
+
+const ProductDetail = () => {
+  const { productId } = useParams()
+  const product = products.find((item) => item.id === productId)
+  const { cart, addToCart, changeQuantity } = useStoreCart()
+
+  if (!product) {
+    return <div className="min-h-screen bg-background text-foreground"><StorefrontNav cart={cart} onQuantity={changeQuantity} products={products} /><main className="mx-auto max-w-3xl px-5 py-24 text-center"><h1 className="text-4xl font-bold">Product not found</h1><p className="mt-4 text-muted-foreground">This product isn’t in the KINETIX collection.</p><Link to="/" className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 font-semibold text-primary-foreground"><ArrowLeft size={17} /> Back to the store</Link></main><StorefrontFooter /></div>
+  }
+
+  return <div className="min-h-screen bg-background text-foreground"><StorefrontNav cart={cart} onQuantity={changeQuantity} products={products} /><main className="mx-auto max-w-[1440px] px-5 py-10 md:px-10 md:py-16"><Link to="/#best-sellers" className="inline-flex items-center gap-2 text-sm text-muted-foreground transition hover:text-primary"><ArrowLeft size={16} /> Back to all gear</Link><section className="mt-8 grid items-center gap-8 lg:grid-cols-2 lg:gap-16"><div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#1E293B] p-2"><img src={product.image} alt={product.name} className="aspect-[1.12/0.9] w-full rounded-xl object-cover" /><div className="absolute left-6 top-6 rounded-md border border-white/15 bg-[#0B0F17]/75 px-3 py-1.5 text-xs font-semibold text-foreground backdrop-blur">{product.category}</div></div><div className="max-w-xl"><p className="mb-4 flex items-center gap-2 text-xs font-bold uppercase tracking-[0.2em] text-primary"><span className="h-px w-8 bg-primary" /> KINETIX / Setup essentials</p><h1 className="text-4xl font-extrabold leading-tight tracking-tight md:text-6xl">{product.name}</h1><p className="mt-5 text-lg leading-8 text-muted-foreground">{product.description}.</p><div className="mt-7 flex items-baseline gap-3"><span className="text-3xl font-bold">${product.price}</span><span className="text-sm text-muted-foreground">USD</span></div><button type="button" onClick={() => addToCart(product.id)} className="mt-7 inline-flex h-12 items-center gap-3 rounded-lg bg-primary px-6 text-sm font-bold text-primary-foreground transition hover:brightness-110">Add to Cart <ArrowRight size={17} /></button><div className="mt-8 grid gap-3 border-t border-white/10 pt-6 sm:grid-cols-3">{[[Truck, "Free Shipping"], [Check, "30-Day Trial"], [ShieldCheck, "2-Year Warranty"]].map(([Icon, label]) => { const BadgeIcon = Icon as typeof Truck; return <div key={label as string} className="flex items-center gap-2 text-xs font-medium text-muted-foreground"><BadgeIcon size={15} className="text-primary" />{label as string}</div> })}</div><p className="mt-8 flex items-center gap-2 text-xs text-muted-foreground"><Zap size={14} className="text-primary" /> Designed for better hours at your desk.</p></div></section><section className="mt-16 border-t border-white/10 pt-10 md:mt-24"><p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Product overview</p><h2 className="mt-3 text-2xl font-bold">A focused upgrade for your setup.</h2><p className="mt-4 max-w-2xl text-sm leading-7 text-muted-foreground">{product.description}. Explore the details above, then add it to your cart whenever you’re ready.</p><Link to="/#best-sellers" className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-primary transition hover:gap-3">Explore all KINETIX gear <ArrowRight size={16} /></Link></section></main><StorefrontFooter /></div>
+}
+
+export default ProductDetail
