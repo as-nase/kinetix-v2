@@ -6,7 +6,7 @@ Built with **[Chantan](https://chantan.studio)** — describe what you want, the
 
 - **Edit this project:** [open it in Chantan](https://chantan.studio/dashboard/project/4f7cb80a-c353-4e9b-92a5-e838b4bf92f9)
 - **Live site:** not published yet — open the project in Chantan and press **Publish**
-- **Repository:** `kinetix-v2` (private)
+- **Repository:** `as-nase/kinetix-v2` (private)
 
 ## How do I change this app?
 
@@ -22,7 +22,7 @@ You need [Node.js](https://nodejs.org) installed. Then:
 
 ```bash
 # 1. Clone this repository
-git clone https://github.com/<your-username>/kinetix-v2.git
+git clone https://github.com/as-nase/kinetix-v2.git
 
 # 2. Go into the folder
 cd kinetix-v2
